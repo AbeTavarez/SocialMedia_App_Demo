@@ -5,7 +5,7 @@ import session from 'express-sessions';
 import cookieParser from 'cookie-parser';
 import flash from 'flash';
 
-import routes from './routes.js';
+import routes from './routes/routes.js';
 
 const app = express();
 
