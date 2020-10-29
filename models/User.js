@@ -1,4 +1,7 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+
+const SALT_ROUNDS = 10;
 
 const userSchema = mongoose.Schema({
   username: {
@@ -21,3 +24,21 @@ const userSchema = mongoose.Schema({
 userSchema.methods.name = () => {
   return this.displayName || this.username;
 };
+
+// if password id not modified skip
+userSchema.pre('save', (done) => {
+  let user = this;
+  if (!user.isModified('password')) {
+    return done();
+  }
+});
+
+bcrypt.genSaltSync(SALT_ROUNDS, () => {
+  if (err) return err;
+
+  bcrypt.hash(user.password, SALT_ROUNDS, (err, hashedPassword) => {
+    if (err) return done(err);
+
+    user.password = hashedPassword;
+  });
+});
