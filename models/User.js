@@ -31,14 +31,21 @@ userSchema.pre('save', (done) => {
   if (!user.isModified('password')) {
     return done();
   }
-});
 
-bcrypt.genSaltSync(SALT_ROUNDS, () => {
-  if (err) return err;
+  bcrypt.genSalt(SALT_ROUNDS, () => {
+    if (err) return err;
 
-  bcrypt.hash(user.password, SALT_ROUNDS, (err, hashedPassword) => {
-    if (err) return done(err);
+    bcrypt.hash(user.password, SALT_ROUNDS, (err, hashedPassword) => {
+      if (err) return done(err);
 
-    user.password = hashedPassword;
+      user.password = hashedPassword;
+      done();
+    });
   });
 });
+
+userSchema.methods.checkPasswords = (guess, done) => {
+  bcrypt.compare(guess, this.password, (err, res) => {
+    done(err, res);
+  });
+};
