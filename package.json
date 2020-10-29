@@ -1,0 +1,24 @@
+{
+  "name": "socialmedia_app_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git remote add origin https://github.com/AbeTavarez/SocialMedia_App_Demo.git"
+  },
+  "author": "Abraham Tavarez",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-sessions": "^1.0.6",
+    "mongoose": "^5.10.11",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  }
+}
