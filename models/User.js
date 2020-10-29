@@ -49,3 +49,7 @@ userSchema.methods.checkPasswords = (guess, done) => {
     done(err, res);
   });
 };
+
+const User = mongoose.model('User', userSchema);
+
+export default User;
